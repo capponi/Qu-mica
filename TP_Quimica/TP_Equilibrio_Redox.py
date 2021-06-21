@@ -1,24 +1,54 @@
 import tkinter.font as tkFont
 import tkinter as tk
 
+#Crear ventana 
+ventana=tk.Tk()
+
+#Valores de tension
+tensionHidrogeno = 0
+tensionAluminio = 1.67
+tensionZinc = 0.76
+tensionCobre = -0.34
+tensionPlata = -0.8
+tensionHierro1_3 = 0.04
+tensionHierro1_2 = 0.44
+tensionHierro2_3 = -0.77
+tensionAzufre = 0.48
+tensionEstaño = 0.14
+
+tensionAnodo = tensionHidrogeno
+tensionCatodo = tensionHidrogeno
+resultadoTension = tk.StringVar(value="")
+
+#Calculo de tensiones
+def calcularTension():
+    resultado = "{:.2f}".format(tensionCatodo - tensionAnodo)
+    resultadoTension.set(resultado)
+    generarValorVisor(resultado)
+
+def setTensionAnodo(valor):
+    global tensionAnodo
+    tensionAnodo = valor
+
+def setTensionCatodo(valor):
+    global tensionCatodo
+    tensionCatodo = valor
+
 #Comandos para botones
-def ceroVolt():
-    tk.Label(ventana,image=img_0v,relief="solid").place(x=47,y=40, width=150)
-
-def ceroCincoVolt():
-    tk.Label(ventana,image=img_0_5v,relief="solid").place(x=47,y=40, width=150)
-    
-def unVolt():
-    tk.Label(ventana,image=img_1v,relief="solid").place(x=47,y=40, width=150)
-
-def unoCincoVolt():
-    tk.Label(ventana,image=img_1_5v,relief="solid").place(x=47,y=40, width=150)
-
-def dosVolt():
-    tk.Label(ventana,image=img_2v,relief="solid").place(x=47,y=40, width=150)
+def generarValorVisor(valor):
+    listaCaracteres = list(valor)
+    if(not(listaCaracteres.__contains__("-"))):
+        listaCaracteres = [""] + listaCaracteres
+    valorX = 87
+    for digito in listaCaracteres:
+        tk.Label(ventana,image=diccDigitos[digito],borderwidth=0,highlightthickness=0).place(x=valorX,y=60)
+        if(digito == "."):
+            valorX += 6
+        else:
+            valorX += 21
     
 def borrar_visor():
-    z1=tk.Label(ventana,image=img_visor_vacio,relief="solid").place(x=47,y=40, width=150)
+    tk.Label(ventana,image=img_visor_vacio,borderwidth=0,highlightthickness=0).place(x=47,y=40)
 
 def Al_positivo():
     tk.Label(ventana, image=img_Al_positivo,bd=0).place(x=295,y=261)
@@ -74,9 +104,6 @@ def S_positivo():
 def S_negativo():
     tk.Label(ventana, image=img_S_negativo,bd=0).place(x=553,y=260)
 
-#Crear ventana    
-ventana=tk.Tk()
-
 #Imagen de fondo para ventana
 img=tk.PhotoImage(file="Imagenes/fondo.png")
 lbl=tk.Label(ventana, image=img).pack()
@@ -88,6 +115,36 @@ img_0_5v=tk.PhotoImage(file="Imagenes/0_5v.png")
 img_1v=tk.PhotoImage(file="Imagenes/1v.png")
 img_1_5v=tk.PhotoImage(file="Imagenes/1_5v.png")
 img_2v=tk.PhotoImage(file="Imagenes/2v.png")
+img_0=tk.PhotoImage(file="Imagenes/0.png")
+img_1=tk.PhotoImage(file="Imagenes/1.png")
+img_2=tk.PhotoImage(file="Imagenes/2.png")
+img_3=tk.PhotoImage(file="Imagenes/3.png")
+img_4=tk.PhotoImage(file="Imagenes/4.png")
+img_5=tk.PhotoImage(file="Imagenes/5.png")
+img_6=tk.PhotoImage(file="Imagenes/6.png")
+img_7=tk.PhotoImage(file="Imagenes/7.png")
+img_8=tk.PhotoImage(file="Imagenes/8.png")
+img_9=tk.PhotoImage(file="Imagenes/9.png")
+img_menos=tk.PhotoImage(file="Imagenes/-.png")
+img_punto=tk.PhotoImage(file="Imagenes/punto.png")
+img_vacio=tk.PhotoImage(file="Imagenes/vacio.png")
+
+#Diccionario de mapeo de digitos
+diccDigitos = {
+    "0": img_0,
+    "1": img_1,
+    "2": img_2,
+    "3": img_3,
+    "4": img_4,
+    "5": img_5,
+    "6": img_6,
+    "7": img_7,
+    "8": img_8,
+    "9": img_9,
+    "-": img_menos,
+    ".": img_punto,
+    "": img_vacio
+}
 
 #Imagenes de elementos positivos
 img_Al_positivo=tk.PhotoImage(file="Imagenes/Aluminio_positivo.png")
@@ -112,34 +169,34 @@ img_FePt_negativo=tk.PhotoImage(file="Imagenes/HierroPt_negativo.png")
 img_S_negativo=tk.PhotoImage(file="Imagenes/Azufre_negativo.png")
 
 #Botones para elementos positivos
-bt_h_pos=tk.Button(ventana, text="H2 | H", fg='black',command=ceroVolt).place(x=400,y=100, width=70)
-bt_zn_pos=tk.Button(ventana, text="Zn | Zn++", fg='black',command=Zn_positivo).place(x=400,y=130, width=70)
-bt_ag_pos=tk.Button(ventana, text="Ag | Ag+", fg='black',command=Ag_positivo).place(x=400,y=160, width=70)
-bt_fee_pos=tk.Button(ventana, text="Fe | Fe++", fg='black',command=Fee_positivo).place(x=400,y=190, width=70)
-bt_s_pos=tk.Button(ventana, text="S- | S", fg='black',command=S_positivo).place(x=400,y=220, width=70)
-bt_al_pos=tk.Button(ventana, text="Al | Al+++", fg='black',command=Al_positivo).place(x=475,y=100, width=70)
-bt_cu_pos=tk.Button(ventana, text="Cu | Cu++", fg='black',command=Cu_positivo).place(x=475,y=130, width=70)
-bt_feee_pos=tk.Button(ventana, text="Fe | Fe+++", fg='black',command=Feee_positivo).place(x=475,y=160, width=70)
-bt_fept_pos=tk.Button(ventana, text="Fe++,Fe+++", fg='black',command=FePt_positivo).place(x=475,y=190, width=70)
-bt_Sn_pos=tk.Button(ventana, text="Sn | Sn++", fg='black',command=Sn_positivo).place(x=475,y=220, width=70)
+bt_h_pos=tk.Button(ventana, text="H2 | H", fg='black',command=lambda:[setTensionCatodo(tensionHidrogeno), calcularTension()]).place(x=400,y=100, width=70)
+bt_zn_pos=tk.Button(ventana, text="Zn | Zn++", fg='black',command=lambda:[Zn_positivo(), setTensionCatodo(tensionZinc), calcularTension()]).place(x=400,y=130, width=70)
+bt_ag_pos=tk.Button(ventana, text="Ag | Ag+", fg='black',command=lambda:[Ag_positivo(), setTensionCatodo(tensionPlata), calcularTension()]).place(x=400,y=160, width=70)
+bt_fee_pos=tk.Button(ventana, text="Fe | Fe++", fg='black',command=lambda:[Fee_positivo(), setTensionCatodo(tensionHierro1_2), calcularTension()]).place(x=400,y=190, width=70)
+bt_s_pos=tk.Button(ventana, text="S- | S", fg='black',command=lambda:[S_positivo(), setTensionCatodo(tensionAzufre), calcularTension()]).place(x=400,y=220, width=70)
+bt_al_pos=tk.Button(ventana, text="Al | Al+++", fg='black',command=lambda:[Al_positivo(), setTensionCatodo(tensionAluminio), calcularTension()]).place(x=475,y=100, width=70)
+bt_cu_pos=tk.Button(ventana, text="Cu | Cu++", fg='black',command=lambda:[Cu_positivo(), setTensionCatodo(tensionCobre), calcularTension()]).place(x=475,y=130, width=70)
+bt_feee_pos=tk.Button(ventana, text="Fe | Fe+++", fg='black',command=lambda:[Feee_positivo(), setTensionCatodo(tensionHierro1_3), calcularTension()]).place(x=475,y=160, width=70)
+bt_fept_pos=tk.Button(ventana, text="Fe++,Fe+++", fg='black',command=lambda:[FePt_positivo(), setTensionCatodo(tensionHierro2_3), calcularTension()]).place(x=475,y=190, width=70)
+bt_Sn_pos=tk.Button(ventana, text="Sn | Sn++", fg='black',command=lambda:[Sn_positivo(), setTensionCatodo(tensionEstaño), calcularTension()]).place(x=475,y=220, width=70)
 
 #Botones para elementos negativos
-bt_h_neg=tk.Button(ventana, text="H2 | H", fg='black',command=ceroVolt).place(x=610,y=100, width=70)
-bt_zn_neg=tk.Button(ventana, text="Zn | Zn++", fg='black',command=Zn_negativo).place(x=610,y=130, width=70)
-bt_ag_neg=tk.Button(ventana, text="Ag | Ag+", fg='black',command=Ag_negativo).place(x=610,y=160, width=70)
-bt_fee_neg=tk.Button(ventana, text="Fe | Fe++", fg='black',command=Fee_negativo).place(x=610,y=190, width=70)
-bt_s_neg=tk.Button(ventana, text="S- | S", fg='black',command=S_negativo).place(x=610,y=220, width=70)
-bt_al_neg=tk.Button(ventana, text="Al | Al+++", fg='black',command=Al_negativo).place(x=685,y=100, width=70)
-bt_cu_neg=tk.Button(ventana, text="Cu | Cu++", fg='black',command=Cu_negativo).place(x=685,y=130, width=70)
-bt_feee_neg=tk.Button(ventana, text="Fe | Fe+++", fg='black',command=Feee_negativo).place(x=685,y=160, width=70)
-bt_fept_neg=tk.Button(ventana, text="Fe++,Fe+++", fg='black',command=FePt_negativo).place(x=685,y=190, width=70)
-bt_Sn_neg=tk.Button(ventana, text="Sn | Sn++", fg='black',command=Sn_negativo).place(x=685,y=220, width=70)
+bt_h_neg=tk.Button(ventana, text="H2 | H", fg='black',command=lambda:[setTensionAnodo(tensionHidrogeno), calcularTension()]).place(x=610,y=100, width=70)
+bt_zn_neg=tk.Button(ventana, text="Zn | Zn++", fg='black',command=lambda:[Zn_negativo(), setTensionAnodo(tensionZinc), calcularTension()]).place(x=610,y=130, width=70)
+bt_ag_neg=tk.Button(ventana, text="Ag | Ag+", fg='black',command=lambda:[Ag_negativo(), setTensionAnodo(tensionPlata), calcularTension()]).place(x=610,y=160, width=70)
+bt_fee_neg=tk.Button(ventana, text="Fe | Fe++", fg='black',command=lambda:[Fee_negativo(), setTensionAnodo(tensionHierro1_2), calcularTension()]).place(x=610,y=190, width=70)
+bt_s_neg=tk.Button(ventana, text="S- | S", fg='black',command=lambda:[S_negativo(), setTensionAnodo(tensionAzufre), calcularTension()]).place(x=610,y=220, width=70)
+bt_al_neg=tk.Button(ventana, text="Al | Al+++", fg='black',command=lambda:[Al_negativo(), setTensionAnodo(tensionAluminio), calcularTension()]).place(x=685,y=100, width=70)
+bt_cu_neg=tk.Button(ventana, text="Cu | Cu++", fg='black',command=lambda:[Cu_negativo(), setTensionAnodo(tensionCobre), calcularTension()]).place(x=685,y=130, width=70)
+bt_feee_neg=tk.Button(ventana, text="Fe | Fe+++", fg='black',command=lambda:[Feee_negativo(), setTensionAnodo(tensionHierro1_3), calcularTension()]).place(x=685,y=160, width=70)
+bt_fept_neg=tk.Button(ventana, text="Fe++,Fe+++", fg='black',command=lambda:[FePt_negativo(), setTensionAnodo(tensionHierro2_3), calcularTension()]).place(x=685,y=190, width=70)
+bt_Sn_neg=tk.Button(ventana, text="Sn | Sn++", fg='black',command=lambda:[Sn_negativo(), setTensionAnodo(tensionEstaño), calcularTension()]).place(x=685,y=220, width=70)
 
 #Boton para borrar
 bt_borrar=tk.Button(ventana, text="Borrar", fg='black',command=borrar_visor).place(x=250,y=20, width=60)
 
 #Visor inicial vacio
-z1=tk.Label(ventana,image=img_visor_vacio,relief="solid").place(x=47,y=40, width=150)
+z1=tk.Label(ventana,image=img_visor_vacio,borderwidth=0,highlightthickness=0).place(x=47,y=40)
 
 #Mantener ventana abierta y sin posibilidad de maximizar
 ventana.resizable(0,0)
