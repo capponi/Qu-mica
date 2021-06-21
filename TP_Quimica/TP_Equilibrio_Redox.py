@@ -6,15 +6,15 @@ ventana=tk.Tk()
 
 #Valores de tension
 tensionHidrogeno = 0
-tensionAluminio = 1.67
-tensionZinc = 0.76
-tensionCobre = -0.34
-tensionPlata = -0.8
-tensionHierro1_3 = 0.04
-tensionHierro1_2 = 0.44
-tensionHierro2_3 = -0.77
-tensionAzufre = 0.48
-tensionEstaño = 0.14
+tensionAluminio = -1.67
+tensionZinc = -0.76
+tensionCobre = 0.34
+tensionPlata = 0.8
+tensionHierro1_3 = -0.04
+tensionHierro1_2 = -0.44
+tensionHierro2_3 = 0.77
+tensionAzufre = -0.48
+tensionEstaño = -0.14
 
 tensionAnodo = tensionHidrogeno
 tensionCatodo = tensionHidrogeno
