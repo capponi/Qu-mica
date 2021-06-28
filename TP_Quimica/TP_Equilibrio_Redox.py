@@ -3,6 +3,7 @@ import tkinter as tk
 
 #Crear ventana 
 ventana=tk.Tk()
+estaPrendido = 0
 
 #Valores de tension
 tensionHidrogeno = 0
@@ -22,9 +23,10 @@ resultadoTension = tk.StringVar(value="")
 
 #Calculo de tensiones
 def calcularTension():
-    resultado = "{:.2f}".format(tensionCatodo - tensionAnodo)
-    resultadoTension.set(resultado)
-    generarValorVisor(resultado)
+    if(estaPrendido):
+        resultado = "{:.2f}".format(tensionCatodo - tensionAnodo)
+        resultadoTension.set(resultado)
+        generarValorVisor(resultado)
 
 def setTensionAnodo(valor):
     global tensionAnodo
@@ -47,6 +49,21 @@ def generarValorVisor(valor):
         else:
             valorX += 21
     
+def cambiarModo():
+    global estaPrendido, bt_volt
+    if(not(estaPrendido)):
+        estaPrendido = 1
+        cambioImagen = img_voltimetro
+        calcularTension()
+    elif(estaPrendido):
+        estaPrendido = 0
+        cambioImagen = img_apagado
+        borrar_visor()
+    bt_volt.config(image=cambioImagen)
+    bt_volt.photo = cambioImagen
+    
+    
+
 def borrar_visor():
     tk.Label(ventana,image=img_visor_vacio,borderwidth=0,highlightthickness=0).place(x=47,y=40)
 
@@ -107,6 +124,8 @@ def S_negativo():
 #Imagen de fondo para ventana
 img=tk.PhotoImage(file="Imagenes/fondo.png")
 lbl=tk.Label(ventana, image=img).pack()
+img_voltimetro=tk.PhotoImage(file="Imagenes/modoVoltimetro.png")
+img_apagado=tk.PhotoImage(file="Imagenes/modoApagado.png")
 
 #Imagenes para voltajes
 img_visor_vacio=tk.PhotoImage(file="Imagenes/visor_vacio.png")
@@ -192,11 +211,13 @@ bt_feee_neg=tk.Button(ventana, text="Fe | Fe+++", fg='black',command=lambda:[Fee
 bt_fept_neg=tk.Button(ventana, text="Fe++,Fe+++", fg='black',command=lambda:[FePt_negativo(), setTensionAnodo(tensionHierro2_3), calcularTension()]).place(x=685,y=190, width=70)
 bt_Sn_neg=tk.Button(ventana, text="Sn | Sn++", fg='black',command=lambda:[Sn_negativo(), setTensionAnodo(tensionEstaño), calcularTension()]).place(x=685,y=220, width=70)
 
-#Boton para borrar
-bt_borrar=tk.Button(ventana, text="Borrar", fg='black',command=borrar_visor).place(x=250,y=20, width=60)
+#Cambiar a voltimetro
+bt_volt=tk.Label(ventana,image=img_apagado)
+bt_volt.place(x=37,y=158,height=141,width=171)
+bt_volt.bind('<Button-1>', lambda x: cambiarModo())
 
 #Visor inicial vacio
-z1=tk.Label(ventana,image=img_visor_vacio,borderwidth=0,highlightthickness=0).place(x=47,y=40)
+z1=tk.Label(ventana,image=img_visor_vacio,bd=0,highlightthickness=0).place(x=47,y=40)
 
 #Mantener ventana abierta y sin posibilidad de maximizar
 ventana.resizable(0,0)
