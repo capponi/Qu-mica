@@ -3,6 +3,9 @@ import tkinter as tk
 #Creacion de ventana
 ventana=tk.Tk()
 
+#Titulo de la ventana
+ventana.title("Equilibrio Redox")
+
 #Imagen de fondo para ventana
 img=tk.PhotoImage(file="Imagenes/fondo.png")
 lbl=tk.Label(ventana, image=img).pack()
@@ -99,11 +102,6 @@ img_S_negativo=tk.PhotoImage(file="Imagenes/Azufre_negativo.png")
 
 #Imagenes para voltajes
 img_visor_vacio=tk.PhotoImage(file="Imagenes/visor_vacio.png")
-img_0v=tk.PhotoImage(file="Imagenes/0v.png")
-img_0_5v=tk.PhotoImage(file="Imagenes/0_5v.png")
-img_1v=tk.PhotoImage(file="Imagenes/1v.png")
-img_1_5v=tk.PhotoImage(file="Imagenes/1_5v.png")
-img_2v=tk.PhotoImage(file="Imagenes/2v.png")
 img_0=tk.PhotoImage(file="Imagenes/0.png")
 img_1=tk.PhotoImage(file="Imagenes/1.png")
 img_2=tk.PhotoImage(file="Imagenes/2.png")
