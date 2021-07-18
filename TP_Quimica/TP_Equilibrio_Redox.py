@@ -80,43 +80,43 @@ def cambiarRelieve(boton,tipo):
 botones_positivos=[]
 
 bt_h_pos=tk.Button(ventana, text="H2 | H", fg='black',command=lambda:[H_positivo(),cambiarRelieve(bt_h_pos,'positivo'),setTensionCatodo(tensionHidrogeno), calcularTension()])
-bt_h_pos.place(x=400,y=100, width=70)
+bt_h_pos.place(x=350,y=100, width=70)
 botones_positivos.append(bt_h_pos)
 
 bt_zn_pos=tk.Button(ventana, text="Zn | Zn++", fg='black',command=lambda:[Zn_positivo(),cambiarRelieve(bt_zn_pos,'positivo'), setTensionCatodo(tensionZinc), calcularTension()])
-bt_zn_pos.place(x=400,y=130, width=70)
+bt_zn_pos.place(x=350,y=130, width=70)
 botones_positivos.append(bt_zn_pos)
 
 bt_ag_pos=tk.Button(ventana, text="Ag | Ag+", fg='black',command=lambda:[Ag_positivo(),cambiarRelieve(bt_ag_pos,'positivo'), setTensionCatodo(tensionPlata), calcularTension()])
-bt_ag_pos.place(x=400,y=160, width=70)
+bt_ag_pos.place(x=350,y=160, width=70)
 botones_positivos.append(bt_ag_pos)
 
 bt_fee_pos=tk.Button(ventana, text="Fe | Fe++", fg='black',command=lambda:[Fee_positivo(),cambiarRelieve(bt_fee_pos,'positivo'), setTensionCatodo(tensionHierro1_2), calcularTension()])
-bt_fee_pos.place(x=400,y=190, width=70)
+bt_fee_pos.place(x=350,y=190, width=70)
 botones_positivos.append(bt_fee_pos)
 
 bt_s_pos=tk.Button(ventana, text="S- | S", fg='black',command=lambda:[S_positivo(),cambiarRelieve(bt_s_pos,'positivo'), setTensionCatodo(tensionAzufre), calcularTension()])
-bt_s_pos.place(x=400,y=220, width=70)
+bt_s_pos.place(x=350,y=220, width=70)
 botones_positivos.append(bt_s_pos)
 
 bt_al_pos=tk.Button(ventana, text="Al | Al+++", fg='black',command=lambda:[Al_positivo(),cambiarRelieve(bt_al_pos,'positivo'), setTensionCatodo(tensionAluminio), calcularTension()])
-bt_al_pos.place(x=475,y=100, width=70)
+bt_al_pos.place(x=425,y=100, width=70)
 botones_positivos.append(bt_al_pos)
 
 bt_cu_pos=tk.Button(ventana, text="Cu | Cu++", fg='black',command=lambda:[Cu_positivo(),cambiarRelieve(bt_cu_pos,'positivo'), setTensionCatodo(tensionCobre), calcularTension()])
-bt_cu_pos.place(x=475,y=130, width=70)
+bt_cu_pos.place(x=425,y=130, width=70)
 botones_positivos.append(bt_cu_pos)
 
 bt_feee_pos=tk.Button(ventana, text="Fe | Fe+++", fg='black',command=lambda:[Feee_positivo(),cambiarRelieve(bt_feee_pos,'positivo'), setTensionCatodo(tensionHierro1_3), calcularTension()])
-bt_feee_pos.place(x=475,y=160, width=70)
+bt_feee_pos.place(x=425,y=160, width=70)
 botones_positivos.append(bt_feee_pos)
 
 bt_fept_pos=tk.Button(ventana, text="Fe++,Fe+++", fg='black',command=lambda:[FePt_positivo(),cambiarRelieve(bt_fept_pos,'positivo'), setTensionCatodo(tensionHierro2_3), calcularTension()])
-bt_fept_pos.place(x=475,y=190, width=70)
+bt_fept_pos.place(x=425,y=190, width=70)
 botones_positivos.append(bt_fept_pos)
 
 bt_Sn_pos=tk.Button(ventana, text="Sn | Sn++", fg='black',command=lambda:[Sn_positivo(),cambiarRelieve(bt_Sn_pos,'positivo'), setTensionCatodo(tensionEstaño), calcularTension()])
-bt_Sn_pos.place(x=475,y=220, width=70)
+bt_Sn_pos.place(x=425,y=220, width=70)
 botones_positivos.append(bt_Sn_pos)
 
 #Botones para elementos negativos
