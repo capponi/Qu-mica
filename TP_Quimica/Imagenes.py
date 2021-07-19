@@ -24,6 +24,9 @@ lbl=tk.Label(ventana, image=img).pack()
 img_voltimetro=tk.PhotoImage(file=resource_path("Imagenes\modoVoltimetro.png"))
 img_apagado=tk.PhotoImage(file=resource_path("Imagenes\modoApagado.png"))
 
+#Icono de la ventana
+ventana.iconbitmap(resource_path("logo.ico"))
+
 #Funciones para insertar imagenes
 def borrar_visor():
     tk.Label(ventana,image=img_visor_vacio,borderwidth=0,highlightthickness=0).place(x=47,y=40)
